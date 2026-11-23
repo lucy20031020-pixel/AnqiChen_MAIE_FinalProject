@@ -1,0 +1,21 @@
+# All research and reference resources stay local.
+/resources/
+/resource/
+previous_webs/
+thesis/
+
+# Generated dependencies and caches.
+node_modules/
+venv/
+.venv/
+__pycache__/
+.pytest_cache/
+*.py[cod]
+.DS_Store
+
+# Local configuration and credentials.
+.env
+.env.*
+!.env.example
+.codex/
+.agents/

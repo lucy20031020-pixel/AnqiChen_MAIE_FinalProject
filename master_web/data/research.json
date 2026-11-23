@@ -1,0 +1,1405 @@
+{
+  "schema_version": 4,
+  "edition": "05",
+  "checked": "2026-11-17",
+  "context": {
+    "country": "United Kingdom",
+    "country_code": "UK",
+    "platform": "COMMONROOM",
+    "provider": "LENS",
+    "community": "The After Hours Room",
+    "access_object": "A discussion and its comments inside one community",
+    "tag": "fictional",
+    "rule": "18+ is COMMONROOM’s fictional community rule. It is not a legal classification of these posts.",
+    "scope": "You are opening a discussion, not registering for the whole platform.",
+    "demo": "Prewritten demonstration accounts. Results are repeatable, not estimates of real failure rates."
+  },
+  "rules": {
+    "tag": "fictional",
+    "age_threshold": 18,
+    "initial_method": "face",
+    "fallback": [
+      "document",
+      "appeal",
+      "leave"
+    ],
+    "decision_authority": "COMMONROOM",
+    "assessment_actor": "LENS",
+    "initial_order": "Selfie first, then ID if needed: an authored sequence, not a universal Reddit process."
+  },
+  "profiles": {
+    "edge": {
+      "label": "Uncertain estimate",
+      "description": "A fictional estimate cannot settle the gate; ID, review or exit follows.",
+      "face": "uncertain",
+      "document": "accepted",
+      "tag": "fictional"
+    },
+    "clear": {
+      "label": "Estimate accepted",
+      "description": "A fictional estimated age is accepted by the platform.",
+      "face": "clear",
+      "document": "accepted",
+      "tag": "fictional"
+    },
+    "unsupported": {
+      "label": "D · Fallback document unsupported",
+      "description": "The first estimate is uncertain; the ID sample is not accepted.",
+      "face": "uncertain",
+      "document": "unsupported",
+      "tag": "fictional"
+    },
+    "unavailable": {
+      "label": "Sample cannot be checked",
+      "description": "No facial evidence is sent. The platform offers an ID fallback.",
+      "face": "unavailable",
+      "document": "accepted",
+      "tag": "fictional"
+    }
+  },
+  "outcomes": {
+    "granted": {
+      "label": "Access granted",
+      "stamp": "GRANTED",
+      "tone": "green",
+      "access": "The discussion opens.",
+      "detail": "COMMONROOM accepts the returned result and grants access to the discussion.",
+      "tag": "fictional",
+      "symbol": "✓",
+      "decision": "Granted"
+    },
+    "pending": {
+      "label": "Review pending",
+      "stamp": "PENDING",
+      "tone": "amber",
+      "access": "The discussion stays closed.",
+      "detail": "COMMONROOM has your review request. Access is still restricted.",
+      "tag": "fictional",
+      "symbol": "…",
+      "decision": "Pending / restricted"
+    },
+    "withdrawn": {
+      "label": "Visit ended",
+      "stamp": "WITHDRAWN",
+      "tone": "red",
+      "access": "The discussion stays closed.",
+      "detail": "You stopped the check. Nothing else was sent.",
+      "tag": "fictional",
+      "symbol": "↩",
+      "decision": "Withdrawn / restricted"
+    },
+    "unconfirmed": {
+      "label": "Age unconfirmed",
+      "stamp": "UNRESOLVED",
+      "tone": "red",
+      "access": "The discussion stays closed.",
+      "detail": "No accepted ID was provided. COMMONROOM keeps the discussion restricted.",
+      "tag": "fictional",
+      "symbol": "!",
+      "decision": "Unconfirmed / restricted"
+    }
+  },
+  "scenarios": {
+    "CR-01": {
+      "title": "A first check opens the door",
+      "profile": "clear",
+      "actions": [
+        "continue",
+        "submit-face"
+      ],
+      "outcome": "granted",
+      "tag": "fictional",
+      "country": "UK",
+      "source_ids": [
+        "S01",
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "archived": true
+    },
+    "CR-02": {
+      "title": "More evidence, then entry",
+      "profile": "edge",
+      "actions": [
+        "continue",
+        "submit-face",
+        "document",
+        "submit-document"
+      ],
+      "outcome": "granted",
+      "tag": "fictional",
+      "country": "UK",
+      "source_ids": [
+        "S01",
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "archived": true
+    },
+    "CR-03": {
+      "title": "A review request, still outside",
+      "profile": "edge",
+      "actions": [
+        "continue",
+        "submit-face",
+        "appeal",
+        "submit-appeal"
+      ],
+      "outcome": "pending",
+      "tag": "fictional",
+      "country": "UK",
+      "source_ids": [
+        "S01",
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "archived": true
+    },
+    "CR-04": {
+      "title": "Leave after the estimate",
+      "profile": "edge",
+      "actions": [
+        "continue",
+        "submit-face",
+        "leave"
+      ],
+      "outcome": "withdrawn",
+      "tag": "fictional",
+      "country": "UK",
+      "source_ids": [
+        "S01",
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "archived": true
+    },
+    "CR-05": {
+      "title": "Leave before submitting evidence",
+      "profile": "edge",
+      "actions": [
+        "leave"
+      ],
+      "outcome": "withdrawn",
+      "tag": "fictional",
+      "country": "UK",
+      "source_ids": [
+        "S01",
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "archived": true
+    },
+    "CR-06": {
+      "title": "A document cannot settle the check",
+      "profile": "unsupported",
+      "actions": [
+        "continue",
+        "submit-face",
+        "document",
+        "submit-document",
+        "close-result"
+      ],
+      "outcome": "unconfirmed",
+      "tag": "fictional",
+      "country": "UK",
+      "source_ids": [
+        "S01",
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "archived": true
+    },
+    "CR-07": {
+      "title": "Appeal after an unsupported document",
+      "profile": "unsupported",
+      "actions": [
+        "continue",
+        "submit-face",
+        "document",
+        "submit-document",
+        "appeal",
+        "submit-appeal"
+      ],
+      "outcome": "pending",
+      "tag": "fictional",
+      "country": "UK",
+      "source_ids": [
+        "S01",
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "archived": true
+    },
+    "CR-08": {
+      "title": "Leave after the document attempt",
+      "profile": "unsupported",
+      "actions": [
+        "continue",
+        "submit-face",
+        "document",
+        "submit-document",
+        "leave"
+      ],
+      "outcome": "withdrawn",
+      "tag": "fictional",
+      "country": "UK",
+      "source_ids": [
+        "S01",
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "archived": true
+    },
+    "CR-09": {
+      "title": "No facial evidence; ID permits entry",
+      "profile": "unavailable",
+      "actions": [
+        "continue",
+        "cannot-complete",
+        "document",
+        "submit-document"
+      ],
+      "outcome": "granted",
+      "tag": "fictional",
+      "country": "UK",
+      "source_ids": [
+        "S01",
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "archived": true
+    },
+    "CR-10": {
+      "title": "Cannot complete; platform review requested",
+      "profile": "unavailable",
+      "actions": [
+        "continue",
+        "cannot-complete",
+        "appeal",
+        "submit-appeal"
+      ],
+      "outcome": "pending",
+      "tag": "fictional",
+      "country": "UK",
+      "source_ids": [
+        "S01",
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "archived": true
+    },
+    "CR-11": {
+      "title": "Leave without a facial sample",
+      "profile": "unavailable",
+      "actions": [
+        "continue",
+        "cannot-complete",
+        "leave"
+      ],
+      "outcome": "withdrawn",
+      "tag": "fictional",
+      "country": "UK",
+      "source_ids": [
+        "S01",
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "archived": true
+    },
+    "CR-12": {
+      "title": "No face sample; ID unsupported",
+      "profile": "unsupported",
+      "actions": [
+        "continue",
+        "cannot-complete",
+        "document",
+        "submit-document",
+        "close-result"
+      ],
+      "outcome": "unconfirmed",
+      "tag": "fictional",
+      "country": "UK",
+      "source_ids": [
+        "S01",
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "archived": true
+    },
+    "CR-13": {
+      "title": "No face sample; review after unsupported ID",
+      "profile": "unsupported",
+      "actions": [
+        "continue",
+        "cannot-complete",
+        "document",
+        "submit-document",
+        "appeal",
+        "submit-appeal"
+      ],
+      "outcome": "pending",
+      "tag": "fictional",
+      "country": "UK",
+      "source_ids": [
+        "S01",
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "archived": true
+    },
+    "CR-14": {
+      "title": "Leave after an ID-only attempt",
+      "profile": "unsupported",
+      "actions": [
+        "continue",
+        "cannot-complete",
+        "document",
+        "submit-document",
+        "leave"
+      ],
+      "outcome": "withdrawn",
+      "tag": "fictional",
+      "country": "UK",
+      "source_ids": [
+        "S01",
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "archived": true
+    },
+    "FC-00": {
+      "title": "Leave before choosing a character",
+      "character_id": null,
+      "profile": "edge",
+      "actions": [
+        "leave"
+      ],
+      "outcome": "withdrawn",
+      "tag": "fictional",
+      "country": "UK",
+      "source_ids": [
+        "S01",
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "interactive": true
+    },
+    "FC-01": {
+      "title": "A first estimate permits entry",
+      "character_id": "C-01",
+      "profile": "clear",
+      "actions": [
+        "choose-character",
+        "check-declaration",
+        "send-declaration",
+        "continue",
+        "select-face",
+        "send-face",
+        "finish-processing"
+      ],
+      "outcome": "granted",
+      "tag": "fictional",
+      "country": "UK",
+      "source_ids": [
+        "S01",
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "interactive": true
+    },
+    "FC-02": {
+      "title": "An ID adds disclosure and permits entry",
+      "character_id": "C-01",
+      "profile": "edge",
+      "actions": [
+        "choose-character",
+        "check-declaration",
+        "send-declaration",
+        "continue",
+        "select-face",
+        "send-face",
+        "finish-processing",
+        "document",
+        "select-document",
+        "send-document"
+      ],
+      "outcome": "granted",
+      "tag": "fictional",
+      "country": "UK",
+      "source_ids": [
+        "S01",
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "interactive": true
+    },
+    "FC-03": {
+      "title": "Review after an uncertain estimate",
+      "character_id": "C-01",
+      "profile": "edge",
+      "actions": [
+        "choose-character",
+        "check-declaration",
+        "send-declaration",
+        "continue",
+        "select-face",
+        "send-face",
+        "finish-processing",
+        "appeal",
+        "choose-reason",
+        "send-review"
+      ],
+      "outcome": "pending",
+      "tag": "fictional",
+      "country": "UK",
+      "source_ids": [
+        "S01",
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "interactive": true,
+      "reason": "review_assessment"
+    },
+    "FC-04": {
+      "title": "Stop before sending an ID",
+      "character_id": "C-01",
+      "profile": "edge",
+      "actions": [
+        "choose-character",
+        "check-declaration",
+        "send-declaration",
+        "continue",
+        "select-face",
+        "send-face",
+        "finish-processing",
+        "document",
+        "select-document",
+        "leave"
+      ],
+      "outcome": "withdrawn",
+      "tag": "fictional",
+      "country": "UK",
+      "source_ids": [
+        "S01",
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "interactive": true
+    },
+    "FC-05": {
+      "title": "Leave without declaring a birthdate",
+      "character_id": "C-01",
+      "profile": "edge",
+      "actions": [
+        "choose-character",
+        "leave"
+      ],
+      "outcome": "withdrawn",
+      "tag": "fictional",
+      "country": "UK",
+      "source_ids": [
+        "S01",
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "interactive": true
+    },
+    "FC-06": {
+      "title": "Declare a birthdate, decline the face sample",
+      "character_id": "C-01",
+      "profile": "edge",
+      "actions": [
+        "choose-character",
+        "check-declaration",
+        "send-declaration",
+        "continue",
+        "select-face",
+        "leave"
+      ],
+      "outcome": "withdrawn",
+      "tag": "fictional",
+      "country": "UK",
+      "source_ids": [
+        "S01",
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "interactive": true
+    },
+    "FC-07": {
+      "title": "No face sample; an ID permits entry",
+      "character_id": "C-01",
+      "profile": "unavailable",
+      "actions": [
+        "choose-character",
+        "check-declaration",
+        "send-declaration",
+        "continue",
+        "cannot-complete",
+        "document",
+        "select-document",
+        "send-document"
+      ],
+      "outcome": "granted",
+      "tag": "fictional",
+      "country": "UK",
+      "source_ids": [
+        "S01",
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "interactive": true
+    },
+    "FC-08": {
+      "title": "Review without sending a face sample",
+      "character_id": "C-01",
+      "profile": "unavailable",
+      "actions": [
+        "choose-character",
+        "check-declaration",
+        "send-declaration",
+        "continue",
+        "cannot-complete",
+        "appeal",
+        "choose-reason",
+        "send-review"
+      ],
+      "outcome": "pending",
+      "tag": "fictional",
+      "country": "UK",
+      "source_ids": [
+        "S01",
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "interactive": true,
+      "reason": "review_assessment"
+    },
+    "FC-09": {
+      "title": "Leave without sending a face sample",
+      "character_id": "C-01",
+      "profile": "unavailable",
+      "actions": [
+        "choose-character",
+        "check-declaration",
+        "send-declaration",
+        "continue",
+        "cannot-complete",
+        "leave"
+      ],
+      "outcome": "withdrawn",
+      "tag": "fictional",
+      "country": "UK",
+      "source_ids": [
+        "S01",
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "interactive": true
+    },
+    "FC-10": {
+      "title": "An estimate permits entry without an ID",
+      "character_id": "C-02",
+      "profile": "clear",
+      "actions": [
+        "choose-character",
+        "check-declaration",
+        "send-declaration",
+        "continue",
+        "select-face",
+        "send-face",
+        "finish-processing"
+      ],
+      "outcome": "granted",
+      "tag": "fictional",
+      "country": "UK",
+      "source_ids": [
+        "S01",
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "interactive": true
+    },
+    "FC-11": {
+      "title": "No accepted ID; request review",
+      "character_id": "C-02",
+      "profile": "edge",
+      "actions": [
+        "choose-character",
+        "check-declaration",
+        "send-declaration",
+        "continue",
+        "select-face",
+        "send-face",
+        "finish-processing",
+        "document",
+        "document-unavailable",
+        "appeal",
+        "choose-reason",
+        "send-review"
+      ],
+      "outcome": "pending",
+      "tag": "fictional",
+      "country": "UK",
+      "source_ids": [
+        "S01",
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "interactive": true,
+      "reason": "no_document"
+    },
+    "FC-12": {
+      "title": "No accepted ID; leave",
+      "character_id": "C-02",
+      "profile": "edge",
+      "actions": [
+        "choose-character",
+        "check-declaration",
+        "send-declaration",
+        "continue",
+        "select-face",
+        "send-face",
+        "finish-processing",
+        "document",
+        "document-unavailable",
+        "leave"
+      ],
+      "outcome": "withdrawn",
+      "tag": "fictional",
+      "country": "UK",
+      "source_ids": [
+        "S01",
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "interactive": true
+    },
+    "FC-13": {
+      "title": "Ask for review before the ID alternative",
+      "character_id": "C-02",
+      "profile": "edge",
+      "actions": [
+        "choose-character",
+        "check-declaration",
+        "send-declaration",
+        "continue",
+        "select-face",
+        "send-face",
+        "finish-processing",
+        "appeal",
+        "choose-reason",
+        "send-review"
+      ],
+      "outcome": "pending",
+      "tag": "fictional",
+      "country": "UK",
+      "source_ids": [
+        "S01",
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "interactive": true,
+      "reason": "no_document"
+    },
+    "FC-14": {
+      "title": "Decline the ID request",
+      "character_id": "C-02",
+      "profile": "edge",
+      "actions": [
+        "choose-character",
+        "check-declaration",
+        "send-declaration",
+        "continue",
+        "select-face",
+        "send-face",
+        "finish-processing",
+        "leave"
+      ],
+      "outcome": "withdrawn",
+      "tag": "fictional",
+      "country": "UK",
+      "source_ids": [
+        "S01",
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "interactive": true
+    },
+    "FC-15": {
+      "title": "Leave without declaring a birthdate",
+      "character_id": "C-02",
+      "profile": "edge",
+      "actions": [
+        "choose-character",
+        "leave"
+      ],
+      "outcome": "withdrawn",
+      "tag": "fictional",
+      "country": "UK",
+      "source_ids": [
+        "S01",
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "interactive": true
+    },
+    "FC-16": {
+      "title": "Declare a birthdate, decline the face sample",
+      "character_id": "C-02",
+      "profile": "edge",
+      "actions": [
+        "choose-character",
+        "check-declaration",
+        "send-declaration",
+        "continue",
+        "select-face",
+        "leave"
+      ],
+      "outcome": "withdrawn",
+      "tag": "fictional",
+      "country": "UK",
+      "source_ids": [
+        "S01",
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "interactive": true
+    },
+    "FC-17": {
+      "title": "No face or accepted ID; request review",
+      "character_id": "C-02",
+      "profile": "unavailable",
+      "actions": [
+        "choose-character",
+        "check-declaration",
+        "send-declaration",
+        "continue",
+        "cannot-complete",
+        "document",
+        "document-unavailable",
+        "appeal",
+        "choose-reason",
+        "send-review"
+      ],
+      "outcome": "pending",
+      "tag": "fictional",
+      "country": "UK",
+      "source_ids": [
+        "S01",
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "interactive": true,
+      "reason": "no_document"
+    },
+    "FC-18": {
+      "title": "No face or accepted ID; leave",
+      "character_id": "C-02",
+      "profile": "unavailable",
+      "actions": [
+        "choose-character",
+        "check-declaration",
+        "send-declaration",
+        "continue",
+        "cannot-complete",
+        "document",
+        "document-unavailable",
+        "leave"
+      ],
+      "outcome": "withdrawn",
+      "tag": "fictional",
+      "country": "UK",
+      "source_ids": [
+        "S01",
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "interactive": true
+    },
+    "FC-19": {
+      "title": "Review without a face or ID attempt",
+      "character_id": "C-02",
+      "profile": "unavailable",
+      "actions": [
+        "choose-character",
+        "check-declaration",
+        "send-declaration",
+        "continue",
+        "cannot-complete",
+        "appeal",
+        "choose-reason",
+        "send-review"
+      ],
+      "outcome": "pending",
+      "tag": "fictional",
+      "country": "UK",
+      "source_ids": [
+        "S01",
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "interactive": true,
+      "reason": "no_document"
+    },
+    "FC-20": {
+      "title": "Leave without a face or ID attempt",
+      "character_id": "C-02",
+      "profile": "unavailable",
+      "actions": [
+        "choose-character",
+        "check-declaration",
+        "send-declaration",
+        "continue",
+        "cannot-complete",
+        "leave"
+      ],
+      "outcome": "withdrawn",
+      "tag": "fictional",
+      "country": "UK",
+      "source_ids": [
+        "S01",
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "interactive": true
+    },
+    "FC-21": {
+      "title": "No accepted ID; keep the unresolved outcome",
+      "character_id": "C-02",
+      "profile": "edge",
+      "actions": [
+        "choose-character",
+        "check-declaration",
+        "send-declaration",
+        "continue",
+        "select-face",
+        "send-face",
+        "finish-processing",
+        "document",
+        "document-unavailable",
+        "close-result"
+      ],
+      "outcome": "unconfirmed",
+      "tag": "fictional",
+      "country": "UK",
+      "source_ids": [
+        "S01",
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "interactive": true
+    },
+    "FC-22": {
+      "title": "No face or ID; keep the unresolved outcome",
+      "character_id": "C-02",
+      "profile": "unavailable",
+      "actions": [
+        "choose-character",
+        "check-declaration",
+        "send-declaration",
+        "continue",
+        "cannot-complete",
+        "document",
+        "document-unavailable",
+        "close-result"
+      ],
+      "outcome": "unconfirmed",
+      "tag": "fictional",
+      "country": "UK",
+      "source_ids": [
+        "S01",
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "interactive": true
+    }
+  },
+  "posts": {
+    "archive": {
+      "author": "paperghost",
+      "title": "Who gets to keep the last copy?",
+      "excerpt": "Our local print room is closing. We have one shelf of zines and no agreement on where it should go.",
+      "comments": 38,
+      "tag": "Community archives",
+      "body": "The library can keep them behind a desk, or we can build a lending shelf in the café. One feels safe. The other feels alive. Has anyone found a way to do both?",
+      "reply": "foldedmap: We made a shared catalogue and let contributors choose which copies could travel."
+    },
+    "zine": {
+      "author": "slowtype",
+      "title": "A reading group for things we never finished",
+      "excerpt": "Bring an unfinished essay, a half-bound book, or just a question. Thursday, after the last bus.",
+      "comments": 16,
+      "tag": "Meet-ups",
+      "body": "No presentation and no finished work required. We are meeting at the studio to read a paragraph out loud and leave the rest open.",
+      "reply": "inkweather: I can bring a book that has been “nearly finished” for three years."
+    },
+    "night": {
+      "author": "windowseat",
+      "title": "The city looks different after your shift ends",
+      "excerpt": "A thread for night workers: where do you go when the rest of the city has gone home?",
+      "comments": 24,
+      "tag": "Everyday life",
+      "body": "I have started drawing the places that are still lit at 4 am. A bakery, a bus shelter, a kitchen window. What would you put on the map?",
+      "reply": "smallhours: The all-night café by the station. Someone always saves the corner table."
+    }
+  },
+  "sources": {
+    "S01": {
+      "title": "Reddit · UK Online Safety Act",
+      "url": "https://support.reddithelp.com/hc/en-us/articles/47163677520276-United-Kingdom-Online-Safety-Act",
+      "updated": "2026-10-27",
+      "role": "Main case / UK context",
+      "summary": "Reddit links restricted-content access to age confirmation. This informs the content gate, not a legal rule about these fictional posts.",
+      "checked": "2026-11-17",
+      "tag": "documented",
+      "evidence": "Published statement; not an independent operational audit"
+    },
+    "S02": {
+      "title": "Reddit · Why is Reddit asking for my age?",
+      "url": "https://support.reddithelp.com/hc/en-us/articles/36429514849428-Why-is-Reddit-asking-for-my-age",
+      "updated": "2026-10-06",
+      "role": "Main case / results and correction",
+      "summary": "Reddit describes saved age and status, separate from submitted images, and a correction request. These inform the result trail and platform review.",
+      "checked": "2026-11-17",
+      "tag": "documented",
+      "evidence": "Published statement; not an independent operational audit"
+    },
+    "S03": {
+      "title": "Persona · FAQ for Reddit users",
+      "url": "https://help.withpersona.com/articles/7F6BaF9h8Fxf0XWkwQscXN/",
+      "updated": null,
+      "role": "Provider / main case",
+      "summary": "Persona distinguishes estimated age from document birthdate outputs and the requesting business’s decision. LENS borrows that separation; its samples and status codes are fictional.",
+      "checked": "2026-11-17",
+      "tag": "documented",
+      "evidence": "Published statement; not an independent operational audit"
+    },
+    "S04": {
+      "title": "Discord · How to confirm your age group",
+      "url": "https://support.discord.com/hc/en-us/articles/30326565624343-How-to-Confirm-Your-Age-Group-on-Discord",
+      "updated": "2026-09-24",
+      "role": "Comparison / fallback",
+      "summary": "Discord describes additional methods when needed, saved age groups and on-device facial processing. The fallback is a comparison; LENS does not reproduce Discord’s on-device method.",
+      "checked": "2026-11-17",
+      "tag": "documented",
+      "evidence": "Published statement; not an independent operational audit"
+    },
+    "S05": {
+      "title": "TikTok · Age-appropriate experiences in Europe",
+      "url": "https://newsroom.tiktok.com/updates-to-how-we-enforce-age-appropriate-experiences?lang=en-GB",
+      "updated": "2026-01-16",
+      "role": "Context / classification and challenge",
+      "summary": "TikTok describes account signals, specialist review and appeals in an under-13 enforcement context. That context differs from this 18+ room.",
+      "checked": "2026-11-17",
+      "tag": "documented",
+      "evidence": "Published statement; not an independent operational audit"
+    }
+  },
+  "methods": {
+    "face": {
+      "name": "Facial estimation",
+      "type": "age_estimation",
+      "request": [
+        "Fictional face sample"
+      ],
+      "recipient": "LENS",
+      "purpose": "Estimate age from a prewritten sample.",
+      "returned_type": "estimated_age",
+      "authority": "COMMONROOM",
+      "source_ids": [
+        "S03"
+      ],
+      "tag": "fictional",
+      "note": "Estimated age is not an exact birthdate or an identity confirmation."
+    },
+    "document": {
+      "name": "ID check",
+      "type": "age_verification",
+      "request": [
+        "Fictional ID page",
+        "Name field on sample",
+        "Birthdate field on sample"
+      ],
+      "recipient": "LENS",
+      "purpose": "Read the sample birthdate and check the fictional age condition.",
+      "returned_type": "date_of_birth",
+      "authority": "COMMONROOM",
+      "source_ids": [
+        "S03"
+      ],
+      "tag": "fictional",
+      "note": "The accepted route returns a sample birthdate, not the name or document image, to COMMONROOM."
+    },
+    "appeal": {
+      "name": "Platform review",
+      "type": "appeal",
+      "request": [
+        "Fictional case reference",
+        "Prewritten review request"
+      ],
+      "recipient": "COMMONROOM support",
+      "purpose": "Request correction of the access decision.",
+      "returned_type": "review_status",
+      "authority": "COMMONROOM",
+      "source_ids": [
+        "S02",
+        "S03"
+      ],
+      "tag": "fictional",
+      "note": "This request adds no identity document. Review timing and its outcome are not supplied in the script."
+    },
+    "declaration": {
+      "name": "Birthdate declaration",
+      "type": "self_declaration",
+      "request": [
+        "Fictional birthdate declaration"
+      ],
+      "recipient": "COMMONROOM",
+      "purpose": "Record a fictional age declaration. This is not verification.",
+      "returned_type": "self_declaration",
+      "authority": "COMMONROOM",
+      "source_ids": [
+        "S01"
+      ],
+      "tag": "fictional",
+      "note": "The input interaction is authored. Only the supplied character date is accepted; no entered date is saved."
+    }
+  },
+  "events": {
+    "face_clear": {
+      "method": "face",
+      "name": "Facial estimation",
+      "data": [
+        "Fictional face sample"
+      ],
+      "processor": "LENS",
+      "assessment": "Estimated age: 25. This is not a confirmed birthdate.",
+      "received": "Estimated age: 25; completed status.",
+      "result_type": "estimated_age",
+      "short_assessment": "Estimated age 25",
+      "short_received": "Estimated age 25 + status",
+      "source_ids": [
+        "S03"
+      ],
+      "tag": "fictional",
+      "estimated_age": 25
+    },
+    "face_uncertain": {
+      "method": "face",
+      "name": "Facial estimation",
+      "data": [
+        "Fictional face sample"
+      ],
+      "processor": "LENS",
+      "assessment": "Estimated age: 18. In this fictional scenario, the estimate is too uncertain to confirm the 18+ requirement.",
+      "received": "Estimated age: 18; uncertain result.",
+      "result_type": "estimated_age",
+      "short_assessment": "Estimated age 18; inconclusive",
+      "short_received": "Estimated age 18 + status",
+      "source_ids": [
+        "S03"
+      ],
+      "tag": "fictional",
+      "estimated_age": 18
+    },
+    "face_unavailable": {
+      "method": "face",
+      "name": "Facial estimation",
+      "data": [],
+      "processor": "No evidence recipient",
+      "assessment": "No estimate: the facial step could not be completed.",
+      "received": "Check unavailable. No age value.",
+      "result_type": "no_age",
+      "short_assessment": "No facial estimate",
+      "short_received": "Failure status only",
+      "source_ids": [
+        "S03"
+      ],
+      "tag": "fictional",
+      "unavailable": true
+    },
+    "document_accepted": {
+      "method": "document",
+      "name": "ID check",
+      "data": [
+        "Fictional ID page",
+        "Name field on sample",
+        "Birthdate field on sample"
+      ],
+      "processor": "LENS",
+      "assessment": "Fictional birthdate meets the community’s 18+ rule.",
+      "received": "Sample date of birth; pass result.",
+      "result_type": "date_of_birth",
+      "short_assessment": "Sample birthdate accepted",
+      "short_received": "Sample birthdate + status",
+      "source_ids": [
+        "S03"
+      ],
+      "tag": "fictional"
+    },
+    "document_unsupported": {
+      "method": "document",
+      "name": "ID check",
+      "data": [
+        "Fictional ID page",
+        "Name field on sample",
+        "Birthdate field on sample"
+      ],
+      "processor": "LENS",
+      "assessment": "Sample document unsupported. No birthdate has been verified.",
+      "received": "Unconfirmed status only. No verified birthdate.",
+      "result_type": "no_age",
+      "short_assessment": "Document unsupported; no age",
+      "short_received": "Unconfirmed status only",
+      "source_ids": [
+        "S03"
+      ],
+      "tag": "fictional"
+    },
+    "appeal": {
+      "method": "appeal",
+      "name": "Platform review",
+      "data": [
+        "Fictional case reference",
+        "Prewritten review request"
+      ],
+      "processor": "COMMONROOM support",
+      "assessment": "Review request queued; no new age assessment.",
+      "received": "Case reference and prewritten request. Review remains pending.",
+      "result_type": "review_status",
+      "short_assessment": "Review pending",
+      "short_received": "Case reference + request",
+      "source_ids": [
+        "S02",
+        "S03"
+      ],
+      "tag": "fictional"
+    },
+    "declaration": {
+      "method": "declaration",
+      "name": "Birthdate declaration",
+      "data": [
+        "Fictional birthdate declaration"
+      ],
+      "processor": "COMMONROOM",
+      "assessment": "Declaration received. No age verification has taken place.",
+      "received": "Fictional declared birthdate; not independently checked.",
+      "result_type": "self_declaration",
+      "short_assessment": "No age verification",
+      "short_received": "Declared birthdate",
+      "source_ids": [
+        "S01"
+      ],
+      "tag": "fictional"
+    },
+    "document_missing": {
+      "method": "document",
+      "name": "ID alternative unavailable",
+      "data": [],
+      "processor": "No evidence recipient",
+      "assessment": "The character has no accepted document. No document was assessed.",
+      "received": "No new document result. Access stays restricted.",
+      "result_type": "no_age",
+      "short_assessment": "No ID assessment",
+      "short_received": "No document result",
+      "source_ids": [
+        "S04"
+      ],
+      "tag": "fictional",
+      "document_unavailable": true
+    }
+  },
+  "retention": [
+    {
+      "id": "R1",
+      "tag": "documented",
+      "source_ids": [
+        "S03"
+      ],
+      "scope": "Persona’s Reddit service",
+      "title": "Original materials / published statement",
+      "text": "Persona states that personal information, including submitted images, is deleted immediately after verification ends."
+    },
+    {
+      "id": "R2",
+      "tag": "documented",
+      "source_ids": [
+        "S02"
+      ],
+      "scope": "Reddit",
+      "title": "Derived result / published statement",
+      "text": "Reddit states that verified age and status are stored with the account; it does not receive or store the submitted photos."
+    },
+    {
+      "id": "R3",
+      "tag": "documented",
+      "source_ids": [
+        "S04"
+      ],
+      "scope": "Discord comparison",
+      "title": "Comparison, not the simulated route",
+      "text": "Discord describes deleting source images after confirmation while saving an age group. Its facial processing is described as on-device."
+    }
+  ],
+  "unknowns": {
+    "U1": {
+      "tag": "fictional",
+      "origin": "Fictional setting",
+      "text": "LENS processing location and deletion log are not supplied by this script.",
+      "compact": "location/deletion log"
+    },
+    "U2": {
+      "tag": "fictional",
+      "origin": "Fictional setting",
+      "text": "The expiry of COMMONROOM’s simulated age result and access-request record is not specified.",
+      "compact": "record expiry"
+    },
+    "U3": {
+      "tag": "fictional",
+      "origin": "Fictional setting",
+      "text": "A reply deadline and final review outcome are not specified in the script.",
+      "compact": "review deadline"
+    },
+    "U4": {
+      "tag": "documented",
+      "origin": "Source gap",
+      "source_ids": [
+        "S02",
+        "S03"
+      ],
+      "text": "The linked public help pages do not establish an independently verified deletion log or a guaranteed review response time. These gaps are not proof of retention.",
+      "compact": "independent audit"
+    }
+  },
+  "commercial": {
+    "tag": "fictional",
+    "text": "LENS provides the checking service. COMMONROOM uses it and decides entry. This is a fictional service relationship; no price or contract is modelled.",
+    "source_ids": [
+      "S03"
+    ],
+    "question": "When a check cannot be completed, who takes on the extra work? This is a design question, not a cost finding."
+  },
+  "future": {
+    "tag": "speculative",
+    "title": "If separate checks became one file",
+    "label": "Repeatedly unconfirmed",
+    "text": "Imagine separate visits becoming a shared classification that prompts extra evidence next time. The passport proposes this possibility; it does not establish an existing shared identity database."
+  },
+  "source_gaps": [
+    "Dated UK Reddit / Persona gate, fallback and correction-form captures from the study period.",
+    "The archived Discord help page cited in the draft (10 August 2026). The checked live page is later.",
+    "Independent evidence of deletion or contract terms has not been supplied. Do not infer them from the script.",
+    "The declaration form, consent screens, sample-image operation, character document availability and review-reason options are authored interactions. Dated real UI captures are still needed before claiming those details reproduce a platform."
+  ],
+  "record_fields": {
+    "methods": "Methods",
+    "initial": "Provided first",
+    "additional": "Provided later",
+    "not_provided": "Not provided",
+    "recipients": "Recipients",
+    "assessment": "LENS assessment",
+    "received": "LENS → COMMONROOM",
+    "access": "COMMONROOM access decision",
+    "followup": "Attempts",
+    "review": "COMMONROOM review",
+    "sources": "Sources",
+    "unknowns": "Unknowns"
+  },
+  "characters": {
+    "C-01": {
+      "name": "Alex Rowan",
+      "birthdate": "1994-05-16",
+      "scenario_code": "FI-A",
+      "accepted_document": "DOC-A1",
+      "face_sample": "FACE-A1",
+      "condition": "Has an accepted sample ID.",
+      "adult": true,
+      "tag": "fictional"
+    },
+    "C-02": {
+      "name": "Morgan Vale",
+      "birthdate": "1991-09-24",
+      "scenario_code": "FI-B",
+      "accepted_document": null,
+      "face_sample": "FACE-B1",
+      "condition": "Has no accepted sample ID.",
+      "adult": true,
+      "tag": "fictional"
+    }
+  },
+  "documents": {
+    "DOC-A1": {
+      "character_id": "C-01",
+      "title": "Alex’s exhibition ID sample",
+      "fields": [
+        "Fictional name",
+        "Fictional birthdate",
+        "Exhibition sample marker"
+      ],
+      "provider_reads": [
+        "Birthdate for the scripted age check"
+      ],
+      "exposed_to_provider": [
+        "Name and birthdate on the sample image"
+      ],
+      "platform_receives": [
+        "Sample birthdate",
+        "Authored pass status"
+      ],
+      "tag": "fictional"
+    }
+  },
+  "review_reasons": {
+    "no_document": {
+      "label": "I cannot provide the requested document",
+      "short": "No accepted ID"
+    },
+    "review_assessment": {
+      "label": "I want the assessment reviewed",
+      "short": "Review assessment"
+    }
+  },
+  "active_profiles": [
+    "edge",
+    "clear",
+    "unavailable"
+  ]
+}
