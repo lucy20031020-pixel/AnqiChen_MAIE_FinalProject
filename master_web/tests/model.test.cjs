@@ -80,3 +80,22 @@ test('unsubmitted reviews and declarations cannot become provider assessments',(
  const declarationOnly=start();declare(declarationOnly);M.transition(declarationOnly.draft,'leave');const first=Object.fromEntries(M.recordFields(M.finish(declarationOnly)).map(f=>[f.key,f.value]));const s=start();declare(s);assert.equal(first.assessment,'No age assessment performed');assert.equal(first.received,'No LENS result returned');
  face(s);M.transition(s.draft,'appeal');M.transition(s.draft,'choose-reason',{reason:'review_assessment'});M.transition(s.draft,'leave');const fields=Object.fromEntries(M.recordFields(M.finish(s)).map(f=>[f.key,f.value]));assert.equal(fields.review,'Not submitted');assert.doesNotMatch(fields.additional,/review reason/);
 });
+
+test('a declaration-only stop has the exact disclosure consequence and no provider evidence',()=>{
+ const r=M.scenarioRecord('FC-06'),x=M.experienceSummary(r);
+ assert.equal(x.narrative,'COMMONROOM received the character’s date of birth. LENS received no image. The replies stayed closed.');
+ assert.equal(x.hasImage,false);assert.equal(x.hasDocument,false);assert.equal(x.hasReview,false);assert.doesNotMatch(x.information,/Sample ID|sample image/i);
+});
+test('summaries include only actually submitted evidence, and keep Pending distinct from access',()=>{
+ for(const [id,face,doc,review]of [['FC-04',true,false,false],['FC-02',true,true,false],['FC-11',true,false,true],['FC-17',false,false,true],['FC-21',true,false,false]]){
+  const r=M.scenarioRecord(id),x=M.experienceSummary(r);assert.equal(x.hasImage,face,id);assert.equal(x.hasDocument,doc,id);assert.equal(x.hasReview,review,id);assert.equal(/Sample ID image/.test(x.information),doc,id);
+  if(r.outcome==='pending'){assert.match(x.access,/closed.*pending/i);assert.doesNotMatch(x.access,/opened/);}
+ }
+ assert.equal(M.scenarioRecord('FC-21').outcome,'unconfirmed');assert.doesNotMatch(M.experienceSummary(M.scenarioRecord('FC-21')).access,/withdrew|stopped/i);
+});
+test('other-character visit preserves discussion and rules, but starts with no old disclosures or records',()=>{
+ const s=start();s.draft.post='night';declare(s);face(s);M.transition(s.draft,'document');M.transition(s.draft,'select-document',{sampleId:'DOC-A1'});M.transition(s.draft,'send-document',{confirm:true});const r=M.finish(s),next=M.otherCharacterVisit(r);
+ assert.equal(next.draft.post,'night');assert.equal(next.profile,s.profile);assert.equal(next.draft.characterId,'C-02');assert.equal(next.draft.stage,'declaration');assert.deepEqual(next.draft.events,[]);assert.deepEqual(next.records,[]);assert.deepEqual(next.draft.requests,['declaration']);assert.equal(next.draft.outcome,null);assert.equal(next.draft.choices.dateReady,false);assert.equal(next.draft.choices.faceSample,null);assert.equal(next.draft.choices.documentSample,null);assert.equal(next.draft.choices.reviewReason,null);assert.ok(!JSON.stringify(M.pack(next)).includes(r.id));assert.ok(M.restore(M.pack(next)));assert.notEqual(next.id,s.id);
+ const pending=M.scenarioRecord('FC-11');pending.post='zine';const reverse=M.otherCharacterVisit(pending);assert.equal(reverse.draft.characterId,'C-01');assert.equal(reverse.draft.post,'zine');assert.deepEqual(reverse.draft.events,[]);assert.deepEqual(reverse.records,[]);assert.equal(reverse.draft.choices.reviewReason,null);
+ assert.equal(M.otherCharacterVisit(M.scenarioRecord('FC-00')),null);
+});

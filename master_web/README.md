@@ -13,14 +13,16 @@ Open http://localhost:8080 (or use VS Code Live Server). No install, build or ba
 
 ## The visit
 
-Previews are visible to everyone. Full discussions and comments require age confirmation under **COMMONROOM’s fictional 18+ community rule**. These ordinary topics are not represented as legally age-restricted. This is a UK research setting, not registration for a whole platform. Source dates appear on the forum; the existing source check date remains 17 November 2026, not a new audit.
+The exhibition starts at `index.html` with the supplied introduction and one **Open the forum** button. It opens `community.html`, showing all original discussions in one visible feed. The reading-group invitation is first, marked **Start here · Suggested first visit**, with its original body and **Read the 16 replies** action. The other original posts keep their titles, previews, counts and individual check entries below. **Browse discussions** scrolls to this complete list. Opening the community does not create a check; each post’s reply action starts or reopens its own selected discussion. Legacy `?post=zine` links also show the full feed. The community’s visible name is COMMONROOM throughout.
+
+Previews are visible to everyone. Full discussions and comments require age confirmation under **COMMONROOM’s fictional 18+ community rule**. These ordinary topics are not represented as legally age-restricted. This is a UK research setting, not registration for a whole platform. Source dates remain available in **Research behind this experience**; the existing source check date remains 17 November 2026, not a new audit.
 
 1. Open a discussion and choose **Alex Rowan / C-01** (accepted sample ID) or **Morgan Vale / C-02** (no accepted ID). Both are fictional adults. Expand Character details to see supplied details later.
 2. Type the supplied birthdate or use **Use fictional details**. Only that character’s exact supplied date is accepted. An incorrect input is cleared and never saved. **Send declaration** represents sending the fictional date to COMMONROOM. It is labelled self-declaration and never verifies age independently. There is no second confirmation screen or checkbox.
 3. Continue to fictional provider LENS. Select the built-in abstract image, inspect recipient/purpose, then **Send sample**. Selection alone sends nothing. The short, skippable illustration runs no analysis. Reduced-motion preferences bypass its delay.
 4. In the initial example, the estimate is too uncertain to confirm 18+. COMMONROOM asks for a sample ID; the visitor can provide it, request review, or leave. Alex selects and sends the sample ID in one form. Morgan has no accepted ID to select and can request review, leave, or keep an unresolved outcome.
 5. Review uses a supplied reason, no free text. Sending it produces **Pending**, never an automatic approval. It is not sent to a real service; waiting time is unspecified.
-6. Every ending generates a record. Success opens the discussion originally selected. Returning to the forum reopens that discussion without another check; other discussions still show the entry requirement. Leaving preserves access to previews. Switching discussions during an unfinished route closes that route accurately before starting the next.
+6. Every ending generates a record. Success opens the discussion originally selected; on the reading-group route it reveals the replies. Review, exit and unresolved outcomes leave those replies closed. Sidebar, result, data trail and card use the selected discussion title. Returning to the forum reopens that discussion without another check; other discussions still show the entry requirement. Leaving preserves access to previews. Switching discussions during an unfinished route closes that route accurately before starting the next.
 7. Data trail leads with the outcome and actual additional disclosures. Expand the full process to distinguish requested information, actual submissions, provider assessment, COMMONROOM’s received result and access decision. Passport, print and SVG use the same record fields.
 
 The Research dialog’s **Try another example** offers first-check success (estimate 25), uncertainty (estimate 18), or an unavailable first check. Results are set in advance and repeatable, not random failure rates or judgments about the visitor. A first-check success can grant access to either adult. The estimate of 18 is explicitly uncertain in this fictional setting; no real provider confidence threshold is asserted. Accepted-ID availability follows the character card. Existing age credentials are excluded from active routes because issuer/sharing evidence is incomplete.
@@ -66,7 +68,7 @@ COMMONROOM uses orange-red labels and LENS uses deep-blue labels, matching their
 
 No publishing is performed by this revision. Two static-host options:
 
-- Upload/deploy **the contents of `master_web/`** as the site root on a static HTTPS host. Build command: none; output directory: `master_web` if the host checks out the complete project. Include `data/` and `.nojekyll`.
+- Upload/deploy **the contents of `master_web/`** as the site root on a static HTTPS host. Build command: none; output directory: `master_web` if the host checks out the complete project. Include `data/`, `source_pic/` and `.nojekyll`.
 - For GitHub Pages, create a website repository with **only the contents of `master_web/` at its root**, including `.nojekyll`. Commit/upload it yourself, then Settings → Pages → Deploy from a branch → select that branch and `/ (root)` → Save. GitHub Pages branch publication supports root or `/docs`, not an arbitrary `master_web` folder; an existing repository can instead use a custom workflow deploying that folder. These source-folder options are described in the [official GitHub Pages guide](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site).
 
 After publishing, open the community, complete a visit, and open a fixed example URL directly on another device. No QR or base-URL setup is required. Check phone layout and print a card at 100% for cropping, small text and passport fit.
@@ -93,3 +95,25 @@ npm run test:browser
 ```
 
 Uses installed Chrome by default. `AVP_BROWSER_CHANNEL=chromium` selects Playwright Chromium; `AVP_TEST_URL` changes local server URL; `AVP_TEST_OUTPUT` changes the default `/tmp/avp-card-fit-qa`. The browser tests use the local server; fixed example pages are also checked with both browser storage APIs disabled.
+
+## Exhibition revision backup — 27 November 2026
+
+Before changing the entrance, all 18 files of the submitted `master_web` version were saved in the local archive `resources/version_backups/master_web_before_exhibition_2026-11-27.zip`. It includes a SHA-256 file manifest. This backup is inside the excluded local resources directory and is not a website asset. Extract into a separate folder to inspect the submitted version.
+
+The entrance revision adds one HTML wrapper for the original community, scoped introduction styles and selected-discussion wording. `model.js`, preset rules, method availability, storage keys, card dimensions and LENS styling are unchanged. Start a new visit uses the existing reset and returns to the introduction. The introduction itself does not automatically erase an existing visit.
+
+## Original passport photograph and simpler community entrance
+
+The artist-provided image is actually `source_pic/physical_passport.jpg` (3338 × 5012 px), not a `source/` directory. It is referenced by a relative URL, unchanged, with the supplied alt text and caption. The original photograph shows an open passport and record card; no generated image, crop or replacement is used. Only the final introduction paragraph and photograph form a two-column section on desktop; the section stacks on screens up to 760 px. Other pages keep their existing layout and colours. **Open the forum** still links to `community.html`.
+
+Community membership/presence counts are removed. UK and the fictional 18+ rule stay visible. The source check date remains in the existing research dialog and research data, rather than the community entrance bar.
+
+Both site-root and subdirectory static previews return the original JPEG with HTTP 200. Include the entire `source_pic/` directory when publishing `master_web`. This revision has not been published or checked at a real public deployment URL; confirm the photo on that URL after deployment.
+
+## Participation, disclosure and another-character comparison
+
+Before this revision, the full website was archived locally at `resources/version_backups/master_web_before_disclosure_summary_2026-11-27.zip`. The introduction adds the artist’s question about what adults should have to disclose. The LENS confirmation uses the supplied provider/decision wording and equal-size, equal-style Send the sample image / Stop here controls. No camera, upload, method or outcome rule is added.
+
+Result, Data trail and Passport screens share an event-derived Information shared / Who received it / Access outcome summary. Only events with actually submitted evidence contribute information; selected-but-unsent images or documents do not. Existing print/download card fields continue to derive from those same events. A declaration-only stop says that COMMONROOM received the fictional date, LENS received no image and the replies stayed closed. A review adds its case reference/reason and stays Pending. Missing accepted ID is explained as an unavailable document route, not proof that an adult is underage or that they chose to leave.
+
+After a character’s final card, Try the same discussion as the other character retains the post and example profile and opens the other character’s existing birthday-declaration step. The new visit has no prior evidence, choices, saved slips or insertion marker. It overwrites the current tab’s visit packet; it does not accumulate a cross-visit database. Print or download the first card before switching. A saved print/download remains independent of the cleared browser state. The full Start a new visit reset remains available.

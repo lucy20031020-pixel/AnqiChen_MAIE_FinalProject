@@ -62,3 +62,35 @@ AI assistance covered local removal of the QR feature, scoped provider styling, 
 The nominal card remains 105 × 148 mm. The old passport placeholder was only 40 mm high. It is replaced by a 109 × 152 mm placement area with a centred 105 × 148 mm outline, leaving approximately 2 mm per edge. The cut spread is 260 × 182 mm and folds to 130 × 182 mm on a single landscape A4 print. The placement outline uses grid centring: absolute percentage positioning was found to shift in PDF pagination and create an extra page, so it was removed. PDF page-count verification now catches that failure.
 
 Research → design → implementation → experience: the thesis separates evidence assessment from access control. Authority-labelled card fields and corresponding institution colours make that separation inspectable on paper. The digital record and card use the same actual submission events, while a Pending review remains separate from approval. This revision adds no real verification, personal data or account service. AI assistance covered implementation, geometry measurement, automated checks, PDF inspection and documentation. Physical printing, cutting and insertion remain to be tested by the artist.
+
+# Exhibition entrance — 27 November 2026
+
+Saved the complete pre-change website (18 files plus a SHA-256 manifest) in `resources/version_backups/master_web_before_exhibition_2026-11-27.zip` before editing. The submitted version can be inspected independently; no thesis or source research materials were modified.
+
+`index.html` now presents the artist-supplied introductory copy with one main entry link. The existing forum wrapper is preserved as `community.html`; `?post=zine` renders the existing reading-group post as an open invitation with **Read the 16 replies**. Only this action starts the existing check. Character selection is reused once, with the supplied contextual sentence. Other discussion entries remain available. Successful checking reveals replies; Pending, unresolved and exit states keep replies closed. The same selected title appears in sidebar, result, data trail and paper/downloaded card. COMMONROOM replaces the former visible community name; internal post IDs remain unchanged.
+
+Introduction CSS is scoped to its new page and uses the existing navy service palette, system type and button treatment. Existing stylesheet content, provider styling, state-machine file, outcome scripts, persistence format and paper dimensions remain unchanged. Reset still clears the same state and now arrives at the introduction. AI assistance was limited to this entrance/copy integration, local backup, code checks and documentation; it did not add real checks, uploads, accounts or QR features.
+
+# Full community feed and suggested first visit — 27 November 2026
+
+Saved the preceding exhibition entrance in `resources/version_backups/master_web_before_all_posts_2026-11-27.zip`. The introduction’s first paragraph now uses the artist’s revised community-browsing copy; the main button is **Open the COMMONROOM** and links to the full community home. Other introduction copy, navy styling and layout remain unchanged.
+
+The existing post data was complete. Removed the single-post rendering filter: every community URL now displays the original three posts. The reading-group invitation is first, with the supplied suggested-visit label and sentence, original invitation body and 16-reply action. Remaining posts reuse their original title/preview/count/entry components. Browse discussions is an in-page anchor to the complete feed. Starting a check still passes the clicked post’s own ID; no state-machine or record rules change. No post content was rewritten.
+
+Verification includes all original post content/ordering/entry counts, old query links, the Browse anchor, all three selected-post flows and record titles, existing outcome routes, reset and narrow-screen layouts. No push or publication was performed by this revision.
+
+# Simpler community entrance and original passport photo — 27 November 2026
+
+Removed Members / Here now, fictional membership numbers and their counts disclaimer from the community sidebar. Removed the entrance-bar source date; the original checked date remains in the existing Research dialog. UK and the fictional platform rule remain. Post content and check rules are unchanged.
+
+Found the supplied photograph at `master_web/source_pic/physical_passport.jpg`; `master_web/source` does not exist. The photograph was viewed and confirmed to show the open paper passport and completed record card. The original JPEG is used unchanged, with the artist-supplied alt text and caption. The final introduction paragraph and photo use a local desktop grid that stacks on small screens. Other introduction text, other pages and original colours remain. The main link now reads Open the forum and keeps its community.html destination.
+
+Checks cover full original flows, photo loading/aspect ratio, desktop/phone arrangement and simplified sidebar. Static root/subdirectory previews returned HTTP 200 with byte-identical image contents. No real public deployment was performed or claimed. AI assistance covered code/layout integration, checking the existing image, regression tests and documentation; no image was generated or retouched.
+
+# Disclosure consequences and character comparison — 27 November 2026
+
+Saved the complete preceding website before editing in `resources/version_backups/master_web_before_disclosure_summary_2026-11-27.zip`. Added the artist’s question to the introduction, simplified face-confirmation copy, equalised the two send/stop controls, and clarified that an adult without an accepted ID cannot complete that route. Explicit stops still use the existing withdrawal outcome; the unavailable-document and Pending review routes keep their existing rules.
+
+`experienceSummary` derives submitted information, recipients and access consequences from the actual event log. The same overview is displayed on the result, Data trail and Passport page; existing printable card fields remain based on the same record events. `otherCharacterVisit` builds a clean visit using existing begin/choose-character transitions, retains the selected discussion/profile, and opens the other adult’s declaration step. The browser replaces its old visit packet and records; the interface tells visitors to print before switching. No method, age outcome, character data or storage format was changed. The Research dialog and source material remain unchanged.
+
+AI assistance covered this small presentation/state-reset extension, model and browser checks, screenshots and documentation. No real analysis, identity evidence, QR function, deployment, participant evaluation or thesis edit was added.

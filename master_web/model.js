@@ -204,6 +204,26 @@
       const description=r.outcome==='granted'?'The full discussion and comments are now open.':r.outcome==='pending'?'The review request is waiting. The discussion is still restricted.':'The full discussion is still restricted. You can read the preview.';
       return {title,description,checks,attempts:r.events.filter(e=>['face','document'].includes(e.method)).length};
     }
+    function experienceSummary(r){
+      const sent=r.events.filter(e=>e.data.length),decl=sent.some(e=>e.method==='declaration'),face=sent.some(e=>e.method==='face'),doc=sent.find(e=>e.method==='document'),review=sent.some(e=>e.method==='appeal');
+      const shared=[];if(decl)shared.push('Character’s date of birth (self-declaration)');if(face)shared.push('Supplied sample image');if(doc)shared.push('Sample ID image, including name and date of birth');if(review)shared.push('Case reference and selected review reason');
+      const receipts=[];
+      if(decl)receipts.push('COMMONROOM received the character’s date of birth.');
+      if(face&&doc)receipts.push('LENS received the sample image and the sample ID, including its name and date of birth.');
+      else if(face)receipts.push('LENS received the sample image.');
+      else if(doc)receipts.push('LENS received the sample ID, including its name and date of birth.');
+      else receipts.push('LENS received no image.');
+      if(face||doc){const results=[];if(face)results.push('an age estimate');if(doc)results.push(doc.eventId==='document_accepted'?'the sample birthdate and result':'an unconfirmed document result');receipts.push('COMMONROOM received '+results.join('; later, ')+'.');}
+      if(review)receipts.push('COMMONROOM support received a case reference and the selected review reason.');
+      if(!sent.length)receipts.unshift('No identity evidence was submitted to COMMONROOM.');
+      const access=r.outcome==='granted'?'The replies opened.':r.outcome==='pending'?'The replies stayed closed. Review pending.':r.outcome==='unconfirmed'?'The replies stayed closed. The document route could not be completed.':'The replies stayed closed.';
+      return {information:shared.join('; ')||'Nothing submitted',recipients:receipts.join(' '),access,narrative:[...receipts,access].join(' '),hasDeclaration:decl,hasImage:face,hasDocument:!!doc,hasReview:review};
+    }
+    function otherCharacterVisit(r){
+      if(!r?.outcome||!getCharacter(r)||!has(research.posts,r.post)||!research.active_profiles.includes(r.profile))return null;
+      const other=Object.keys(research.characters).find(id=>id!==r.characterId);if(!other)return null;
+      const s=newPassport();begin(s,r.profile,r.post);transition(s.draft,'choose-character',{characterId:other});return s;
+    }
     // Only whitelisted IDs, enums, booleans and route metadata reach browser storage.
     function packPart(p){if(!p)return null;const out={};
       for(const k of ['id','journeyId','scenario','characterId','country','profile','post','stage','returnStage','outcome','attached'])if(p[k]!==undefined)out[k]=p[k];
@@ -233,7 +253,7 @@
         return {...copy(raw),draft:raw.draft?part(raw.draft,false):null,records:raw.records.map(r=>part(r,true))};
       }catch{return null;}
     }
-    return {...legacy,createLegacy:undefined,newPassport,begin,transition,scenarioId,finish,scenarioRecord:replay,requestedNotProvided,recordFields,getCharacter,summary,
+    return {...legacy,createLegacy:undefined,newPassport,begin,transition,scenarioId,finish,scenarioRecord:replay,requestedNotProvided,recordFields,getCharacter,summary,experienceSummary,otherCharacterVisit,
       judgment:r=>[...r.events].reverse().find(e=>['face','document'].includes(e.method)&&e.data.length)?.assessment||'No age assessment made',unknownItems,unknowns:r=>unknownItems(r).map(u=>u.id+' / '+u.origin+': '+u.text),pack,restore,validState:s=>!!restore(s)};
   }
   globalThis.PassportModel={create};
